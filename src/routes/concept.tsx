@@ -127,9 +127,7 @@ const PanoramaViewer = ({
 		}
 	});
 
-	const texture = useTexture(
-		"https://v0.dev/placeholder.svg?height=1024&width=2048"
-	);
+	const texture = useTexture("./stitch.jpg");
 
 	return (
 		<mesh>
