@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .tanstack/tmp
+
+scripts/ahk/tmp
