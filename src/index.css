@@ -1,1 +1,14 @@
-@import "tailwindcss";
+@import "tailwindcss" important;
+
+@theme {
+	--color-white: #d8d8d8;
+	--color-black: #141414;
+}
+
+body {
+	@apply h-screen w-screen bg-black text-white;
+}
+
+.leaflet-container {
+	@apply bg-black;
+}

@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ConceptRouteImport } from './routes/concept'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MapsIndexRouteImport } from './routes/maps.index'
+import { Route as MapsPlanetRouteImport } from './routes/maps.$planet'
 
 const ConceptRoute = ConceptRouteImport.update({
   id: '/concept',
@@ -28,35 +30,53 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MapsIndexRoute = MapsIndexRouteImport.update({
+  id: '/maps/',
+  path: '/maps/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapsPlanetRoute = MapsPlanetRouteImport.update({
+  id: '/maps/$planet',
+  path: '/maps/$planet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/concept': typeof ConceptRoute
+  '/maps/$planet': typeof MapsPlanetRoute
+  '/maps': typeof MapsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/concept': typeof ConceptRoute
+  '/maps/$planet': typeof MapsPlanetRoute
+  '/maps': typeof MapsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/concept': typeof ConceptRoute
+  '/maps/$planet': typeof MapsPlanetRoute
+  '/maps/': typeof MapsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/concept'
+  fullPaths: '/' | '/about' | '/concept' | '/maps/$planet' | '/maps'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/concept'
-  id: '__root__' | '/' | '/about' | '/concept'
+  to: '/' | '/about' | '/concept' | '/maps/$planet' | '/maps'
+  id: '__root__' | '/' | '/about' | '/concept' | '/maps/$planet' | '/maps/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ConceptRoute: typeof ConceptRoute
+  MapsPlanetRoute: typeof MapsPlanetRoute
+  MapsIndexRoute: typeof MapsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +102,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/maps/': {
+      id: '/maps/'
+      path: '/maps'
+      fullPath: '/maps'
+      preLoaderRoute: typeof MapsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maps/$planet': {
+      id: '/maps/$planet'
+      path: '/maps/$planet'
+      fullPath: '/maps/$planet'
+      preLoaderRoute: typeof MapsPlanetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +123,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ConceptRoute: ConceptRoute,
+  MapsPlanetRoute: MapsPlanetRoute,
+  MapsIndexRoute: MapsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
