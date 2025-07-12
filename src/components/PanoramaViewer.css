@@ -1,0 +1,161 @@
+/* PanoramaViewer.css */
+.panorama-viewer {
+	position: relative;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	overflow: hidden;
+	background: #000;
+	user-select: none;
+}
+
+.panorama-viewer canvas {
+	display: block;
+	outline: none;
+}
+
+.panorama-loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.panorama-error {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #ff6b6b;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	background: rgba(0, 0, 0, 0.8);
+	padding: 20px;
+	border-radius: 8px;
+}
+
+.loading-spinner {
+	width: 40px;
+	height: 40px;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	border-top: 3px solid #fff;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin-bottom: 16px;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.panorama-controls {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	display: flex;
+	gap: 8px;
+	z-index: 10;
+}
+
+.reset-button,
+.rotation-toggle {
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 6px;
+	padding: 10px 12px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: all 0.2s ease;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reset-button:hover,
+.rotation-toggle:hover {
+	background: rgba(255, 255, 255, 1);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.reset-button:active,
+.rotation-toggle:active {
+	transform: translateY(0);
+}
+
+.panorama-info {
+	position: absolute;
+	bottom: 16px;
+	left: 16px;
+	background: rgba(0, 0, 0, 0.8);
+	color: white;
+	padding: 8px 16px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	z-index: 10;
+	backdrop-filter: blur(10px);
+}
+
+.panorama-loading-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.9);
+	color: white;
+	z-index: 20;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+	.panorama-controls {
+		top: 8px;
+		right: 8px;
+	}
+
+	.reset-button,
+	.rotation-toggle {
+		padding: 8px 10px;
+		font-size: 14px;
+	}
+
+	.panorama-info {
+		bottom: 8px;
+		left: 8px;
+		font-size: 12px;
+		padding: 6px 12px;
+	}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.panorama-viewer {
+		border-color: #444;
+	}
+
+	.reset-button,
+	.rotation-toggle {
+		background: rgba(30, 30, 30, 0.9);
+		color: white;
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.reset-button:hover,
+	.rotation-toggle:hover {
+		background: rgba(40, 40, 40, 1);
+	}
+}
